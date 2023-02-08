@@ -1,5 +1,7 @@
 using { my } from '../db/schema';
 
 service MyService {
-    entity MyEntity as projection on my.MyClass;
+    entity Entity as projection on my.Entity;
+    entity OtherEntity as projection on my.OtherEntity;
+    entity ThirdEntity as projection on my.ThirdEntity;
 }
