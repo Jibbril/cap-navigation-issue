@@ -4,8 +4,8 @@ This repo showcases an issue with the error messages being returned when a path 
 - We have three entities: 'Entity', 'OtherEntity' and 'ThirdEntity'. Entity to OtherEntity is a one-to-one association, OtherEntity to ThirdEntity is one-to-many. 
 - For the first Entity, both otherEntity and the thirdEntities exist. So going to [http://localhost:4004/my/Entity(1)/otherEntity/thirdEntities](http://localhost:4004/my/Entity(1)/otherEntity/thirdEntities) shows the correct data.
 - However, for the second Entity, the otherEntity association points to an id that does not exist. So going to [http://localhost:4004/my/Entity(2)/otherEntity](http://localhost:4004/my/Entity(2)/otherEntity) returns nothing. This is correct. However, when we add the thirdEntities association we get a 404 error like here: [http://localhost:4004/my/Entity(2)/otherEntity/thirdEntities](http://localhost:4004/my/Entity(2)/otherEntity/thirdEntities). Shouldn't this also return nothing without causing errors? 
-- The reason why this is relevant is that in the UI we have a [list report](http://localhost:4004/app/webapp/index.html) showing the Entites, and then tables for the related thirdEntities for each Entity. If there is no otherEntity, the thirdEntities table should simply be empty, but in stead it is throwing an error. 
-- We believe that something like the following code change in the @sap/cds/libs folder would fix the issue:
+- The reason why this is relevant is that in the UI we have a [list report](http://localhost:4004/app/webapp/index.html) showing the Entites, and then tables for the related ThirdEntities. If there is no OtherEntity, the ThirdEntities table should simply be empty, but instead it is throwing an error. 
+- We believe that something like the following code change in the @sap/cds/libs folder could fix the issue:
 
 ```
 diff --git a/node_modules/@sap/cds/libx/_runtime/common/generic/crud.js b/node_modules/@sap/cds/libx/_runtime/common/generic/crud.js
